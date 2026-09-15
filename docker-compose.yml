@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_USER: zakaria
+      POSTGRES_PASSWORD: zakariapass
+      POSTGRES_DB: sportconnect_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./database/schema.sql:/docker-entrypoint-initdb.d/1_schema.sql
+      - ./database/seeds.sql:/docker-entrypoint-initdb.d/2_seeds.sql
+
+volumes:
+  pgdata:

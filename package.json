@@ -1,0 +1,24 @@
+{
+  "name": "sconnect-pro",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/lafhielzakaria/Sconnect-Pro#readme",
+  "bugs": {
+    "url": "https://github.com/lafhielzakaria/Sconnect-Pro/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lafhielzakaria/Sconnect-Pro.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "pg": "^8.23.0"
+  }
+}
