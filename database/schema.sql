@@ -35,6 +35,7 @@ CREATE TABLE facilities (
     erp_capacity INT NOT NULL CHECK (erp_capacity > 0),
     is_divisible BOOLEAN NOT NULL DEFAULT FALSE,
     parent_facility_id BIGINT REFERENCES facilities(id) ON DELETE SET NULL,
+    association_id BIGINT NOT NULL REFERENCES associations(id) ON DELETE CASCADE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
