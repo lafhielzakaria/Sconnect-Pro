@@ -4,11 +4,11 @@ const path = require('path');
 
 const viewsPath = path.join(__dirname, '../../views/pages');
 
-async function render(res, viewName, data = {}) {
+async function render(res, viewName, data ) {
     try {
         const filePath = path.join(viewsPath, `${viewName}.ejs`);
+        console.log(filePath);
         const fileRendering = await ejs.renderFile(filePath, data);
-        
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         res.end(fileRendering);
     } catch (err) {

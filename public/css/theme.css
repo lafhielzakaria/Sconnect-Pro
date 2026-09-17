@@ -1,0 +1,132 @@
+/* =========================================================
+   SCONNECT — DESIGN SYSTEM
+   ========================================================= */
+
+:root {
+
+  /* =========================
+     COLORS
+     ========================= */
+
+  --color-ink: #14231C;
+  --color-paper: #F3F4EF;
+  --color-chalk: #FFFFFF;
+
+  --color-turf: #1E6B43;
+  --color-turf-dark: #164E32;
+
+  --color-brick: #B23A1C;
+  --color-navy: #12233A;
+
+  --color-line: #DBDED2;
+  --color-muted: #5B6660;
+
+  --color-accent-mint: #8FD9AE;
+  --color-text-muted-alt: #C7CFC9;
+
+  --color-status-open-bg: #E3F3E9;
+  --color-status-full-bg: #F6E3DC;
+
+  --color-alert-info: #C79A2E;
+  --color-footer-text: #A9B4AC;
+
+
+  /* =========================
+     TYPOGRAPHY
+     ========================= */
+
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: 'Oswald', sans-serif;
+
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-base: 15px;
+  --font-size-lg: 17px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 26px;
+  --font-size-3xl: 32px;
+  --font-size-hero: 46px;
+
+
+  /* =========================
+     FONT WEIGHTS
+     ========================= */
+
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+
+  /* =========================
+     SPACING
+     ========================= */
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 28px;
+  --space-8: 32px;
+  --space-9: 40px;
+  --space-10: 48px;
+  --space-11: 56px;
+  --space-12: 64px;
+  --space-13: 76px;
+
+
+  /* =========================
+     BORDER RADIUS
+     ========================= */
+
+  --radius-sm: 3px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
+  --radius-pill: 999px;
+
+
+  /* =========================
+     BORDERS
+     ========================= */
+
+  --border-width: 1px;
+  --border-color: var(--color-line);
+
+
+  /* =========================
+     SHADOWS
+     ========================= */
+
+  --shadow-sm: 0 1px 2px rgba(20, 35, 28, 0.06);
+  --shadow-md: 0 4px 12px rgba(20, 35, 28, 0.10);
+  --shadow-lg: 0 10px 30px rgba(20, 35, 28, 0.12);
+
+
+  /* =========================
+     LAYOUT
+     ========================= */
+
+  --container-width: 1120px;
+  --container-padding: 32px;
+
+  --navbar-height: 68px;
+
+
+  /* =========================
+     TRANSITIONS
+     ========================= */
+
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+
+
+  /* =========================
+     OPACITY
+     ========================= */
+
+  --opacity-muted: 0.85;
+  --opacity-border: 0.18;
+}

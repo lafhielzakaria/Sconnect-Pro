@@ -5,13 +5,13 @@ CREATE TABLE families (
     id BIGSERIAL PRIMARY KEY,
     family_name VARCHAR(255) NOT NULL,
     quotient_familial NUMERIC(10, 2) NOT NULL CHECK (quotient_familial >= 0),
-    is_resident BOOLEAN NOT NULL DEFAULT TRUE,
     address TEXT NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE members (
     id BIGSERIAL PRIMARY KEY,
+    is_resident BOOLEAN NOT NULL ,
     family_id BIGINT NOT NULL REFERENCES families(id) ON DELETE CASCADE,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
@@ -24,6 +24,7 @@ CREATE TABLE associations (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     contact_email VARCHAR(255) NOT NULL UNIQUE,
+    description text,
     phone VARCHAR(20) NOT NULL,
     siren_number VARCHAR(14) NOT NULL UNIQUE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP

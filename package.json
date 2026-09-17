@@ -16,8 +16,9 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-        
+    "start": "node server.js",
+    "fresh": "docker compose down -v && docker compose up -d",
+    "db:seed": "Get-Content -Raw seeds.sql | docker exec -i postgres-db psql -U zakaria -d sportconnect_db"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
