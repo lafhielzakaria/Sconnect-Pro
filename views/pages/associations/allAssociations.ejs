@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SportConnect Pro — All Associations</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/theme.css">
+</head>
+
+<body>
+
+    <%- include("../partials/navbar") %>
+
+    <section style="padding: 40px 0;">
+
+        <div class="wrap">
+
+            <div class="back-nav" style="margin-bottom: 20px;">
+                <a href="javascript:history.back()" class="back-link">← Back to Overview</a>
+            </div>
+
+            <div class="section-head" style="margin-bottom: 30px;">
+                <h2>All Partner Associations</h2>
+            </div>
+
+            <div class="all-associations-stack">
+
+                <% if (typeof associations !== 'undefined' && associations.length > 0) { %>
+                    <% associations.forEach(assoc => { %>
+                        <div class="full-width-assoc-row">
+                            
+                            <h3>
+                                <%= assoc.name %>
+                            </h3>
+
+                            <p>
+                                <%= assoc.description %>
+                            </p>
+
+                            <div class="assoc-details-meta">
+                                <span><strong>Email:</strong> <%= assoc.contact_email %></span>
+                                <span><strong>Phone:</strong> <%= assoc.phone %></span>
+                                <span><strong>SIREN:</strong> <%= assoc.siren_number %></span>
+                            </div>
+
+                            <a href="/associationDetails/<%= assoc.id %>" class="btn btn-primary">
+                                Become a member →
+                            </a>
+
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p class="empty-note">No partner associations found at this time.</p>
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>

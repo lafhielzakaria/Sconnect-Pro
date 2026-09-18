@@ -10,50 +10,31 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Crucial: theme.css MUST load before style.css -->
     <link rel="stylesheet" href="/public/css/theme.css">
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
 <body>
 
-    <!-- Top Navigation Bar -->
-    <nav class="topbar">
-        <div class="wrap">
-            <div class="brand">
-                Sport<span>Connect</span> Pro
-            </div>
-            <div class="navlinks">
-                <a href="/">Home</a>
-                <a href="/facilities">Facilities</a>
-                <a href="/activities">Activities</a>
-                <a href="/members">Members</a>
-                <a href="/registrations">Registrations</a>
-            </div>
-        </div>
-    </nav>
+    <%- include("../partials/navbar") %>
 
-    <!-- Main Association Details Content -->
     <main class="association-detail-page">
         <div class="wrap">
 
             <% if (typeof selectedAssociation !== 'undefined' && selectedAssociation) { %>
                 
-                <!-- Back Link -->
                 <div class="back-nav">
-                    <a href="/" class="back-link">← Back to Overview</a>
+                    <a href="javascript:history.back()" class="back-link">← Back to Overview</a>
                 </div>
 
                 <div class="details-container">
                     
-                    <!-- Header Info Card -->
                     <div class="details-header-card">
                         <div class="badge-tag">Partner Association</div>
                         <h1><%= selectedAssociation.name %></h1>
                         <p class="association-desc"><%= selectedAssociation.description || 'No description provided for this association.' %></p>
                     </div>
 
-                    <!-- Information Grid -->
                     <div class="info-grid">
                         <div class="info-item">
                             <span class="info-label">Contact Email</span>
@@ -78,7 +59,6 @@
                         </div>
                     </div>
 
-                    <!-- Action Banner / Button -->
                     <div class="membership-action-box">
                         <div class="action-text">
                             <h3>Ready to join this association?</h3>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SportConnect Pro — All Families</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/public/css/style.css">
+    <link rel="stylesheet" href="/public/css/theme.css">
+</head>
+
+<body>
+
+    <%- include("../partials/navbar") %>
+
+        <section style="padding: 40px 0;">
+
+            <div class="wrap">
+
+                <div class="back-nav" style="margin-bottom: 20px;">
+                    <a href="javascript:history.back()" class="back-link">← Back to Overview</a>
+                </div>
+
+                <div class="family-action-header">
+                    <h2>All Household Families</h2>
+                    <a href="/familyCreate" class="btn btn-primary btn-lg">
+                        + Create Family Group
+                    </a>
+                </div>
+
+                <div class="all-families-stack">
+
+                    <% if (typeof families !=='undefined' && families.length> 0) { %>
+                        <% families.forEach(family=> { %>
+                            <div class="full-width-family-row">
+
+                                <h3>
+                                    <%= family.family_name %>
+                                </h3>
+
+                                <p class="family-address">
+                                    <strong>Address:</strong>
+                                    <%= family.address %>
+                                </p>
+
+                                <div class="family-details-meta">
+                                    <span><strong>Quotient Familial (QF):</strong> €<%= family.quotient_familial %>
+                                            </span>
+                                </div>
+
+                            </div>
+                            <% }) %>
+                                <% } else { %>
+                                    <p class="empty-note">No family groups found at this time.</p>
+                                    <% } %>
+
+                </div>
+
+            </div>
+
+        </section>
+
+</body>
+
+</html>

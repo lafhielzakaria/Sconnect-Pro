@@ -8,92 +8,73 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="/public/css/theme.css">
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
 <body>
+        <main class="form-page">
+            <div class="wrap">
 
-    <!-- Top Navigation Bar -->
-    <nav class="topbar">
-        <div class="wrap">
-            <div class="brand">
-                Sport<span>Connect</span> Pro
-            </div>
-            <div class="navlinks">
-                <a href="/">Home</a>
-                <a href="/facilities">Facilities</a>
-                <a href="/activities">Activities</a>
-                <a href="/members">Members</a>
-                <a href="/registrations">Registrations</a>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Form Container -->
-    <main class="form-page">
-        <div class="wrap">
-
-            <div class="back-nav">
-                <a href="/" class="back-link">← Back to Overview</a>
-            </div>
-
-            <div class="form-card-container">
-                <div class="form-header">
-                    <span class="badge-tag">Household Registration</span>
-                    <h1>Create Family Group</h1>
-                    <p>Register a household fiscal unit to qualify members for automated multi-member pricing tier discounts (-15% / -30%) and communal subsidies.</p>
+                <div class="back-nav">
+                    <a href="javascript:history.back()" class="back-link">← Back to Overview</a>
                 </div>
 
-                <!-- Form submitting to POST /families -->
-                <form action="/families" method="POST" class="styled-form">
-
-                    <fieldset class="form-section">
-                        <h2>Household Details</h2>
-                        
-                        <div class="form-row grid-2">
-                            <div class="form-group">
-                                <label for="family_name">Family Name *</label>
-                                <input type="text" id="family_name" name="family_name" required placeholder="e.g. Dupont Family">
-                            </div>
-                            <div class="form-group">
-                                <label for="quotient_familial">Quotient Familial (QF in €) *</label>
-                                <input type="number" id="quotient_familial" name="quotient_familial" step="0.01" min="0" required placeholder="e.g. 550.00">
-                                <small class="help-text">Used for municipal social brackets (&lt;600€, 600-900€, &gt;900€).</small>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="address">Full Address *</label>
-                                <textarea id="address" name="address" rows="3" required placeholder="Enter street address, postal code, and city"></textarea>
-                            </div>
-                        </div>
-
-                
-                    </fieldset>
-
-                    <!-- Form Actions -->
-                    <div class="form-actions">
-                        <a href="/" class="btn btn-secondary">Cancel</a>
-                        <button type="submit" class="btn btn-primary">Create Family Group →</button>
+                <div class="form-card-container">
+                    <div class="form-header">
+                        <span class="badge-tag">Household Registration</span>
+                        <h1>Create Family Group</h1>
+                        <p>Register a household fiscal unit to qualify members for automated multi-member pricing tier
+                            discounts (-15% / -30%) and communal subsidies.</p>
                     </div>
 
-                </form>
+                    <form action="/families" method="POST" class="styled-form">
+
+                        <fieldset class="form-section">
+                            <h2>Household Details</h2>
+
+                            <div class="form-row grid-2">
+                                <div class="form-group">
+                                    <label for="family_name">Family Name </label>
+                                    <input type="text" id="family_name" name="family_name" required
+                                        placeholder="e.g. Dupont Family">
+                                </div>
+                                <div class="form-group">
+                                    <label for="quotient_familial">Quotient Familial (QF in €) </label>
+                                    <input type="number" id="quotient_familial" name="quotient_familial" step="0.01"
+                                        min="0" required placeholder="e.g. 550.00">
+                                    <small class="help-text">Used for municipal social brackets (&lt;600€, 600-900€,
+                                        &gt;900€).</small>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="address">Full Address </label>
+                                    <textarea id="address" name="address" rows="3" required
+                                        placeholder="Enter street address, postal code, and city"></textarea>
+                                </div>
+                            </div>
+
+
+                        </fieldset>
+
+                        <!-- Form Actions -->
+                        <div class="form-actions">
+                            <a href="/" class="btn btn-secondary">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Create Family Group →</button>
+                        </div>
+
+                    </form>
+                </div>
+
             </div>
-
-        </div>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <div class="wrap">
-            <span>SportConnect Pro — Direction des Sports et de la Vie Associative</span>
-            <span>Built on Node.js, PostgreSQL, and HTML</span>
-        </div>
-    </footer>
+        </main>
 
 </body>
+
 </html>

@@ -24,8 +24,8 @@
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "find-my-way": "^9.9.0",
-    "pg": "^8.23.0"
+    "pg": "^8.23.0",
+    "serve-static": "^2.2.1"
   },
-  "devDependencies": {},
   "keywords": []
 }

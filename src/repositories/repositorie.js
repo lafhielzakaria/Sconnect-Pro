@@ -19,7 +19,7 @@ async function update(tableName, id, data, idColumn = 'id') {
     const values = Object.values(data);
 
     const setClause = keys.map((key, index) => `${key} = $${index + 1}`).join(', ');
-    
+
     values.push(id);
     const idParamIndex = values.length;
 
@@ -33,21 +33,39 @@ async function update(tableName, id, data, idColumn = 'id') {
     const { rows } = await db.query(query, values);
     return rows[0];
 }
-
 async function save(tableName, data) {
     const tableInfo = await db.query(`SELECT * FROM ${tableName} LIMIT 0`);
     const validColumns = tableInfo.fields.map(field => field.name);
 
-    const keys = Object.keys(data).filter(key => validColumns.includes(key));
+
+
+    const keys = Object.keys(data).filter(key =>
+        validColumns.includes(key)
+    );
+
+    console.log("KEYS:", keys);
+
     const values = keys.map(key => data[key]);
 
-    const placeholders = keys.map((_, i) => `$${i + 1}`).join(', ');
+    const placeholders = keys
+        .map((_, i) => `$${i + 1}`)
+        .join(', ');
+
     const columns = keys.join(', ');
 
-    const query = `INSERT INTO ${tableName} (${columns}) VALUES (${placeholders}) RETURNING *`;
+    const query = `
+        INSERT INTO ${tableName} (${columns})
+        VALUES (${placeholders})
+        RETURNING *
+    `;
+    console.log("QUERY:", query);
+    console.log("VALUES:", values);
+
     const { rows } = await db.query(query, values);
-    return;
+
+    return rows[0];
 }
+
 
 async function remove(tableName, id, idColumn = 'id') {
     const query = `DELETE FROM ${tableName} WHERE ${idColumn} = $1 RETURNING *`;

@@ -1,5 +1,17 @@
 const { render } = require('../../core/renderer');
-const familyService = require('../../services/family/familyService');
+const service = require('../../services/family/familyService');
+async function index(req, res) {
+    try {
+        const families = await service.returnALlFamilies();
+        if (!families) {
+            return res.status(404).send("no families created until the moment.");
+        }
+        await render(res, 'family/allFamilies', { families });
+    } catch (error) {
+        console.error("Database query failed:", error.message);
+        res.status(500).send("Database connection error. Check your terminal for details.");
+    }
+}
 async function create(req, res) {
     try {
         await render(res, 'family/create', {});
@@ -10,8 +22,14 @@ async function create(req, res) {
 }
 async function store(req, res) {
     try {
-        await familyService.createFamilyGroup(req.body);
+        let rawBody = '';
+        for await (const chunk of req) {
+            rawBody += chunk;
+        }
 
+        const reqBody = Object.fromEntries(new URLSearchParams(rawBody));
+        console.log("controller req.body:", reqBody);
+        await service.createFamilyGroup(reqBody);
         res.writeHead(302, { Location: '/' });
         res.end();
     } catch (error) {
@@ -20,4 +38,4 @@ async function store(req, res) {
         res.end("Database error: Could not save family group.");
     }
 }
-module.exports = { create ,store};
+module.exports = { create, store ,index};
