@@ -458,6 +458,18 @@ footer .wrap { display: flex; justify-content: space-between; }
   line-height: 1.4;
 }
 
+/* Error message and hidden utility classes for JS validation */
+.error-message {
+  font-size: var(--font-size-xs);
+  color: var(--color-brick);
+  font-weight: var(--font-weight-semibold);
+  margin-top: 2px;
+}
+
+.hidden {
+  display: none !important;
+}
+
 .checkbox-group {
   justify-content: center;
 }
@@ -542,7 +554,14 @@ footer .wrap { display: flex; justify-content: space-between; }
     margin-bottom: 15px;
     line-height: 1.5;
 }
+.form-row:has(#qfInput:not(.hidden)) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
 
+.form-row:has(#qfInput.hidden) {
+    display: block;
+}
 .assoc-details-meta {
     display: flex;
     gap: 20px;
@@ -584,6 +603,7 @@ footer .wrap { display: flex; justify-content: space-between; }
     border: 1px solid #e2e8f0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
+
 
 .full-width-family-row h3 {
     margin-top: 0;

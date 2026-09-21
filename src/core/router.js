@@ -11,6 +11,7 @@ router.get('/associationDetails/:id', associationController.findById);
 router.get('/inscription/:id', associationRegistrationController.index);
 router.get('/associations', associationController.index);
 router.get('/families', familyController.index);
+router.get('/familie/:id', familyController.findById);
 function lookup(req, res) {
     router.lookup(req, res);
 }

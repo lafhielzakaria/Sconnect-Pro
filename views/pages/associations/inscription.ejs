@@ -30,95 +30,106 @@
                     <p>Register a new member to link them with municipal activities, calculate household tier discounts, and verify medical compliance.</p>
                 </div>
 
-                <form action="/members" method="POST" class="styled-form">
+                <form action="/members" method="POST" class="styled-form" id="worker_form">
 
-                    <% if (typeof associationId !== 'undefined' && associationId) { %>
-                        <input type="hidden" name="association_id" value="<%= associationId %>">
-                    <% } %>
+    <% if (typeof associationId !== 'undefined' && associationId) { %>
+        <input type="hidden" name="association_id" value="<%= associationId %>">
+    <% } %>
 
-                    <fieldset class="form-section">
-                        <h2>Personal Information</h2>
-                        
-                        <div class="form-row grid-2">
-                            <div class="form-group">
-                                <label for="first_name">First Name </label>
-                                <input type="text" id="first_name" name="first_name" required placeholder="e.g. Jean">
-                            </div>
-                            <div class="form-group">
-                                <label for="last_name">Last Name </label>
-                                <input type="text" id="last_name" name="last_name" required placeholder="e.g. Dupont">
-                            </div>
-                        </div>
+    <fieldset class="form-section">
+        <h2>Personal Information</h2>
+        
+        <div class="form-row grid-2">
+            <div class="form-group">
+                <label for="first_name">First Name </label>
+                <input type="text" id="first_name" name="first_name" class="userInputs"  placeholder="e.g. Jean">
+                <span class="error-message hidden"></span>
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name </label>
+                <input type="text" id="last_name" name="last_name" class="userInputs"  placeholder="e.g. Dupont">
+                <span class="error-message hidden"></span>
+            </div>
+        </div>
 
-                        <div class="form-row grid-2">
-                            <div class="form-group">
-                                <label for="email">Email Address </label>
-                                <input type="email" id="email" name="email" required placeholder="jean.dupont@example.fr">
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number </label>
-                                <input type="tel" id="phone" name="phone" required placeholder="+33 6 00 00 00 00">
-                            </div>
-                        </div>
+        <div class="form-row grid-2">
+            <div class="form-group">
+                <label for="email">Email Address </label>
+                <input type="email" id="email" name="email" class="userInputs"  placeholder="jean.dupont@example.fr">
+                <span class="error-message hidden"></span>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number </label>
+                <input type="tel" id="phone" name="phone" class="userInputs"  placeholder="+33 6 00 00 00 00">
+                <span class="error-message hidden"></span>
+            </div>
+        </div>
 
-                        <div class="form-row grid-2">
-                            <div class="form-group">
-                                <label for="date_of_birth">Date of Birth </label>
-                                <input type="date" id="date_of_birth" name="date_of_birth" required>
-                                <small class="help-text">Used for federal age category calculation (U9, U13, Senior, etc.)</small>
-                            </div>
-                            <div class="form-group">
-                                <label for="family_id">Household / Family ID (Optional)</label>
-                                <input type="number" id="family_id" name="family_id" placeholder="Leave blank if primary member">
-                                <small class="help-text">Required for multi-member household discounts (-15% / -30%).</small>
-                            </div>
-                        </div>
-                    </fieldset>
+        <div class="form-row grid-2">
+            <div class="form-group">
+                <label for="date_of_birth">Date of Birth </label>
+                <input type="date" id="date_of_birth" name="date_of_birth" class="userInputs" >
+                <span class="error-message hidden"></span>
+                <small class="help-text">Used for federal age category calculation (U9, U13, Senior, etc.)</small>
+            </div>
+            <div class="form-group">
+                <label for="family_id">Household / Family ID (Optional)</label>
+                <input type="number" id="family_id" name="family_id" class="userInputs" placeholder="Leave blank if primary member">
+                <span class="error-message hidden"></span>
+                <small class="help-text">Required for multi-member household discounts (-15% / -30%).</small>
+            </div>
+        </div>
+    </fieldset>
 
-                    <fieldset class="form-section">
-                        <h2>Residency & Financial Support</h2>
+    <fieldset class="form-section">
+        <h2>Residency & Financial Support</h2>
 
-                        <div class="form-row grid-2">
-                            <div class="form-group checkbox-group">
-                                <label class="checkbox-label">
-                                    <input type="checkbox" id="is_resident" name="is_resident" value="true">
-                                    <span>Communal Resident</span>
-                                </label>
-                                <small class="help-text">Residents benefit from subsidized base pricing (non-residents incur a +35% municipal fee).</small>
-                            </div>
+        <div class="form-row grid-2">
+            <div class="form-group checkbox-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="is_resident" name="is_resident" class="userInputs" value="true">
+                    <span>Communal Resident</span>
+                </label>
+                <span class="error-message hidden"></span>
+                <small class="help-text">Residents benefit from subsidized base pricing (non-residents incur a +35% municipal fee).</small>
+            </div>
 
-                            <div class="form-group">
-                                <label for="quotient_familial">Quotient Familial (QF in €)</label>
-                                <input type="number" id="quotient_familial" name="quotient_familial" step="0.01" placeholder="e.g. 550.00">
-                                <small class="help-text">Used for municipal social reductions (-40% if QF &lt; 600€, -20% if &le; 900€).</small>
-                            </div>
-                        </div>
-                    </fieldset>
+            <div class="form-group hidden" id="qfInput" style="display: none;">
+                <label for="quotient_familial">Quotient Familial (QF in €)</label>
+                <input type="number" id="quotient_familial" name="quotient_familial" class="userInputs" step="0.01" placeholder="e.g. 550.00">
+                <span class="error-message hidden"></span>
+                <small class="help-text">Used for municipal social reductions (-40% if QF &lt; 600€, -20% if &le; 900€).</small>
+            </div>
+        </div>
+    </fieldset>
 
-                    <fieldset class="form-section">
-                        <h2>Medical Compliance</h2>
+    <fieldset class="form-section">
+        <h2>Medical Compliance</h2>
 
-                        <div class="form-row grid-2">
-                            <div class="form-group">
-                                <label for="medical_certificate_date">Medical Certificate Date </label>
-                                <input type="date" id="medical_certificate_date" name="medical_certificate_date" required>
-                                <small class="help-text">Standard sports certificates are valid for 3 years; high-risk sports require &lt; 1 year.</small>
-                            </div>
+        <div class="form-row grid-2">
+            <div class="form-group">
+                <label for="medical_certificate_date">Medical Certificate Date </label>
+                <input type="date" id="medical_certificate_date" name="medical_certificate_date" class="userInputs" (req, res, params(req, res, params>
+                <span class="error-message hidden"></span>
+                <small class="help-text">Standard sports certificates are valid for 3 years; high-risk sports require &lt; 1 year.</small>
+            </div>
 
-                            <div class="form-group">
-                                <label for="pass_sport_code">State Grant Code (Pass'Sport)</label>
-                                <input type="text" id="pass_sport_code" name="pass_sport_code" placeholder="Optional voucher code">
-                                <small class="help-text">Deducts 50.00 € subject to absolute floor limits.</small>
-                            </div>
-                        </div>
-                    </fieldset>
+            <div class="form-group">
+                <label for="pass_sport_code">State Grant Code (Pass'Sport)</label>
+                <input type="text" id="pass_sport_code" name="pass_sport_code" class="userInputs" placeholder="Optional voucher code">
+                <span class="error-message hidden"></span>
+                <small class="help-text">Deducts 50.00 € subject to absolute floor limits.</small>
+            </div>
+        </div>
+    </fieldset>
 
-                    <div class="form-actions">
-                        <a href="/" class="btn btn-secondary">Cancel</a>
-                        <button type="submit" class="btn btn-primary">Complete Registration →</button>
-                    </div>
+    <div class="form-actions">
+        <a href="/" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Complete Registration →</button>
+    </div>
 
-                </form>
+</form>
+
             </div>
 
         </div>
@@ -130,6 +141,6 @@
             <span>Built on Node.js, PostgreSQL, and HTML</span>
         </div>
     </footer>
-
+<script src="/public/js/client-validation.js"></script>
 </body>
 </html>

@@ -7,7 +7,11 @@ async function createFamilyGroup(data) {
 async function returnALlFamilies() {
     return await repo.index(TABLE);
 }
+async function findById(req, res, id) {
+    return await repo.findById(TABLE, id);
+}
 module.exports = {
     createFamilyGroup,
-    returnALlFamilies
+    returnALlFamilies,
+    findById
 };
