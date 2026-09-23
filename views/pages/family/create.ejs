@@ -17,63 +17,72 @@
 </head>
 
 <body>
-        <main class="form-page">
-            <div class="wrap">
+    <main class="form-page">
+        <div class="wrap">
 
-                <div class="back-nav">
-                    <a href="javascript:history.back()" class="back-link">← Back to Overview</a>
+            <div class="back-nav">
+                <a href="javascript:history.back()" class="back-link">← Back to Overview</a>
+            </div>
+
+            <div class="form-card-container">
+                <div class="form-header">
+                    <span class="badge-tag">Household Registration</span>
+                    <h1>Create Family Group</h1>
+                    <p>Register a household fiscal unit to qualify members for automated multi-member pricing tier
+                        discounts (-15% / -30%) and communal subsidies.</p>
                 </div>
 
-                <div class="form-card-container">
-                    <div class="form-header">
-                        <span class="badge-tag">Household Registration</span>
-                        <h1>Create Family Group</h1>
-                        <p>Register a household fiscal unit to qualify members for automated multi-member pricing tier
-                            discounts (-15% / -30%) and communal subsidies.</p>
-                    </div>
+                <form action="/families/store" method="POST" class="styled-form">
 
-                    <form action="/families" method="POST" class="styled-form">
+                    <fieldset class="form-section">
+                        <h2>Household Details</h2>
 
-                        <fieldset class="form-section">
-                            <h2>Household Details</h2>
-
-                            <div class="form-row grid-2">
-                                <div class="form-group">
-                                    <label for="family_name">Family Name </label>
-                                    <input type="text" id="family_name" name="family_name" required
-                                        placeholder="e.g. Dupont Family">
-                                </div>
-                                <div class="form-group">
-                                    <label for="quotient_familial">Quotient Familial (QF in €) </label>
-                                    <input type="number" id="quotient_familial" name="quotient_familial" step="0.01"
-                                        min="0" required placeholder="e.g. 550.00">
-                                    <small class="help-text">Used for municipal social brackets (&lt;600€, 600-900€,
-                                        &gt;900€).</small>
-                                </div>
+                        <!-- Added Family ID Row -->
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="family_id">Family ID</label>
+                                <input type="text" id="family_id" name="id" placeholder="number ">
+                                <small class="help-text">Enter your family id .</small>
                             </div>
-
-                            <div class="form-row">
-                                <div class="form-group">
-                                    <label for="address">Full Address </label>
-                                    <textarea id="address" name="address" rows="3" required
-                                        placeholder="Enter street address, postal code, and city"></textarea>
-                                </div>
-                            </div>
-
-
-                        </fieldset>
-
-                        <!-- Form Actions -->
-                        <div class="form-actions">
-                            <a href="/" class="btn btn-secondary">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Create Family Group →</button>
                         </div>
 
-                    </form>
-                </div>
+                        <div class="form-row grid-2">
+                            <div class="form-group">
+                                <label for="family_name">Family Name </label>
+                                <input type="text" id="family_name" name="family_name" placeholder="e.g. Dupont Family">
+                            </div>
+                            <div class="form-group">
+                                <label for="quotient_familial">Quotient Familial (QF in €) </label>
+                                <input type="number" id="quotient_familial" name="quotient_familial" step="0.01" min="0"
+                                    placeholder="e.g. 550.00">
+                                <small class="help-text">Used for municipal social brackets (&lt;600€, 600-900€,
+                                    &gt;900€).</small>
+                            </div>
+                        </div>
 
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="address">Full Address </label>
+                                <textarea id="address" name="address" rows="3"
+                                    placeholder="Enter street address, postal code, and city"></textarea>
+                            </div>
+                        </div>
+
+
+                    </fieldset>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <a href="/" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Create Family Group →</button>
+                    </div>
+
+                </form>
             </div>
-        </main>
+
+        </div>
+    </main>
+    <script src="/public/js/client-validation.js"></script>
 
 </body>
 

@@ -36,7 +36,6 @@ async function save(tableName, data) {
     const keys = Object.keys(data).filter(key =>
         validColumns.includes(key)
     );
-    console.log("KEYS:", keys);
     const values = keys.map(key => data[key]);
     const placeholders = keys
         .map((_, i) => `$${i + 1}`)
@@ -47,8 +46,6 @@ async function save(tableName, data) {
         VALUES (${placeholders})
         RETURNING *
     `;
-    console.log("QUERY:", query);
-    console.log("VALUES:", values);
     const { rows } = await db.query(query, values);
     return rows[0];
 }

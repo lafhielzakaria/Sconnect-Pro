@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Association — SportConnect Pro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/public/css/theme.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+    <main class="form-page">
+        <div class="wrap">
+
+            <div class="back-nav">
+                <a href="javascript:history.back()" class="back-link">← Back to Overview</a>
+            </div>
+
+            <div class="form-card-container">
+                <div class="form-header">
+                    <span class="badge-tag">Association Portal</span>
+                    <h1>Create Association</h1>
+                    <p>Register a municipal sports association or club to manage facilities, schedule activities, and coordinate member registrations.</p>
+                </div>
+
+                <form action="/association/store" method="POST" class="association-form">
+
+                    <fieldset class="form-section">
+                        <h2>Association Details</h2>
+
+                        <div class="form-row grid-2">
+                            <div class="form-group">
+                                <label for="assoc_name">Association Name </label>
+                                <input type="text" id="assoc_name" name="name" class="associationInput" placeholder="e.g. Paris Athletic Club">
+                                <small class="error-text hidden"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="assoc_contact_email">Contact Email </label>
+                                <input type="email" id="assoc_contact_email" name="contact_email" class="associationInput" placeholder="contact@association.fr">
+                                <small class="error-text hidden"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row grid-2">
+                            <div class="form-group">
+                                <label for="assoc_phone">Phone Number </label>
+                                <input type="tel" id="assoc_phone" name="phone" class="associationInput" placeholder="+33 1 00 00 00 00">
+                                <small class="error-text hidden"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="assoc_siren_number">SIREN Number </label>
+                                <input type="text" id="assoc_siren_number" name="siren_number" class="associationInput" maxlength="14" placeholder="14-digit identifier">
+                                <small class="help-text">Official French corporate identifier.</small>
+                                <small class="error-text hidden"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row grid-2">
+                            <div class="form-group">
+                                <label for="assoc_base_price">Base Activity Price (€) </label>
+                                <input type="number" id="assoc_base_price" name="base_price" class="associationInput" step="0.01" min="0" placeholder="e.g. 50.00">
+                                <small class="help-text">Default base pricing model for association sessions.</small>
+                                <small class="error-text hidden"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="assoc_family_id">Family ID </label>
+                                <input type="text" id="assoc_family_id" name="family_id" class="associationInput" placeholder="e.g. 123">
+                                <small class="help-text">Optional reference family identifier.</small>
+                                <small class="error-text hidden"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="assoc_description">Description</label>
+                                <textarea id="assoc_description" name="description" class="associationInput" rows="3" placeholder="Briefly describe the association, disciplines offered, and target audience"></textarea>
+                                <small class="error-text hidden"></small>
+                            </div>
+                        </div>
+
+                    </fieldset>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <a href="/" class="btn btn-secondary">Cancel</a>
+                        <button type="submit" class="btn btn-primary">Create Association →</button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+    <script src="/public/js/client-validation.js"></script>
+</body>
+
+</html>

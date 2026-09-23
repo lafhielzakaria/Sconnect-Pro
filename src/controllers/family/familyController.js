@@ -29,7 +29,7 @@ async function store(req, res) {
 
         const reqBody = Object.fromEntries(new URLSearchParams(rawBody));
         console.log("controller req.body:", reqBody);
-        await service.createFamilyGroup(reqBody);
+        await service.store(reqBody);
         res.writeHead(302, { Location: '/' });
         res.end();
     } catch (error) {
@@ -38,17 +38,17 @@ async function store(req, res) {
         res.end("Database error: Could not save family group.");
     }
 }
-async function findById(req, res, params) {
+async function findObject(req, res, params) {
     try {
-        const {id}   = params;
-        const family = await service.findById(req, res,id);
+        const { id } = params;
+        const family = await service.findById(req, res, id);
         if (!family) {
             return res.end(JSON.stringify({ exists: false }));
         }
-        return res.end(JSON.stringify({ exists: true }));
+        return res.end(JSON.stringify({ exists: true, family: family }));
     } catch (error) {
         res.writeHead(500, { "Content-Type": "text/plain" });
         res.end("Database connection error. Check your terminal for details.");
     }
 }
-module.exports = { create, store, index, findById };
+module.exports = { create, store, index, findObject };

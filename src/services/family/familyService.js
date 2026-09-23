@@ -1,7 +1,7 @@
 const repo = require('../../repositories/repositorie');
 const TABLE = 'families';
 
-async function createFamilyGroup(data) {
+async function store(data) {
     return await repo.save(TABLE, data);
 }
 async function returnALlFamilies() {
@@ -11,7 +11,7 @@ async function findById(req, res, id) {
     return await repo.findById(TABLE, id);
 }
 module.exports = {
-    createFamilyGroup,
+    store,
     returnALlFamilies,
     findById
 };

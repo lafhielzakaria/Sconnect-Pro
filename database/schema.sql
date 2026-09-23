@@ -1,12 +1,19 @@
 DROP TABLE IF EXISTS waiting_list CASCADE;
+
 DROP TABLE IF EXISTS registrations CASCADE;
+
 DROP TABLE IF EXISTS activities CASCADE;
+
 DROP TABLE IF EXISTS facilities CASCADE;
+
 DROP TABLE IF EXISTS associations CASCADE;
+
 DROP TABLE IF EXISTS members CASCADE;
+
 DROP TABLE IF EXISTS families CASCADE;
 
 DROP TYPE IF EXISTS waiting_status CASCADE;
+
 DROP TYPE IF EXISTS registration_status CASCADE;
 
 CREATE TYPE registration_status AS ENUM ('confirmed', 'cancelled', 'medical_non_compliant');
@@ -18,7 +25,9 @@ CREATE TABLE families (
     family_name VARCHAR(255) NOT NULL,
     quotient_familial NUMERIC(10, 2) NOT NULL CHECK (quotient_familial >= 0),
     address TEXT NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP
+    WITH
+        TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE members (
@@ -30,7 +39,9 @@ CREATE TABLE members (
     birth_date DATE NOT NULL,
     medical_certificate_date DATE NOT NULL,
     pass_sport_code VARCHAR(50) DEFAULT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP
+    WITH
+        TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE associations (
@@ -39,8 +50,11 @@ CREATE TABLE associations (
     contact_email VARCHAR(255) NOT NULL UNIQUE,
     description TEXT,
     phone VARCHAR(20) NOT NULL,
+    base_price NUMERIC(10, 2) NOT NULL,
     siren_number VARCHAR(14) NOT NULL UNIQUE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP
+    WITH
+        TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE facilities (
@@ -50,7 +64,9 @@ CREATE TABLE facilities (
     is_divisible BOOLEAN NOT NULL DEFAULT FALSE,
     parent_facility_id BIGINT REFERENCES facilities (id) ON DELETE SET NULL,
     association_id BIGINT NOT NULL REFERENCES associations (id) ON DELETE CASCADE,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP
+    WITH
+        TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE activities (
@@ -63,8 +79,10 @@ CREATE TABLE activities (
     activity_date DATE NOT NULL,
     start_time TIME NOT NULL,
     end_time TIME NOT NULL,
-    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT check_time_order CHECK (end_time > start_time)
+    created_at TIMESTAMP
+    WITH
+        TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT check_time_order CHECK (end_time > start_time)
 );
 
 CREATE TABLE registrations (
@@ -74,8 +92,10 @@ CREATE TABLE registrations (
     base_price NUMERIC(10, 2) NOT NULL CHECK (base_price >= 0),
     final_price NUMERIC(10, 2) NOT NULL CHECK (final_price >= 15.00),
     status registration_status NOT NULL DEFAULT 'confirmed',
-    registered_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
-    CONSTRAINT unique_member_activity UNIQUE (member_id, activity_id)
+    registered_at TIMESTAMP
+    WITH
+        TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT unique_member_activity UNIQUE (member_id, activity_id)
 );
 
 CREATE TABLE waiting_list (
@@ -91,7 +111,9 @@ CREATE TABLE waiting_list (
     medical_certificate_date DATE NOT NULL,
     pass_sport_code VARCHAR(50) DEFAULT NULL,
     priority_score INT DEFAULT 0,
-    registered_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+    registered_at TIMESTAMP
+    WITH
+        TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE INDEX idx_members_family_id ON members (family_id);

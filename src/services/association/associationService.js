@@ -8,8 +8,11 @@ async function getAllAssociations() {
 async function getAssociationById(id) {
     return await repo.findById(TABLE, id);
 }
-
+async function store(data) {
+    return await repo.save(TABLE, data);
+}
 module.exports = {
     getAllAssociations,
-    getAssociationById
+    getAssociationById,
+    store
 };

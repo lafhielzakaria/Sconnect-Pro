@@ -27,5 +27,28 @@ async function findById(req, res, params) {
         res.status(500).send("Database connection error. Check your terminal for details.");
     }
 }
+async function create(req, res) {
+    try {
+        await render(res, 'associations/create', {});
+    } catch (error) {
+        console.error("file rendering failed:", error.message);
+    }
+}
+async function store(req, res) {
+    try {
+        let rawBody = '';
+        for await (const part of req) {
+            rawBody += part;
 
-module.exports = { findById , index};
+        }
+        const reqBody = Object.fromEntries(new URLSearchParams(rawBody));
+        await service.store(reqBody);
+        res.writeHead(302, { Location: '/associations' });
+        res.end();
+    } catch (error) {
+        console.error("Failed to save family group:", error.message);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end("Database error: Could not save family group.");
+    }
+}
+module.exports = { findById, index, create, store };
