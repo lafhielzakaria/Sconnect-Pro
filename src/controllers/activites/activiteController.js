@@ -1,0 +1,1 @@
+//ful creation dyal activite 5a nxiki max capacity dyal activite ou la sall li4at dar fuha

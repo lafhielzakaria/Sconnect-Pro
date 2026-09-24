@@ -3,14 +3,16 @@ const service = require('../../services/association/associationService');
 async function index(req, res, params) {
     try {
         const { id } = params;
-        const associations = await service.getAllAssociations();
+        const associations = await service.getAllObjects();
+        const associationsInvitations = await service.getAllObjects(table = "association_members", column = "status", conditionValue = "pending");
+        console.log(associationsInvitations);
         if (!associations) {
             return res.status(404).send("no associations created until the moment.");
         }
-        await render(res, 'associations/allAssociations', { associations });
+        await render(res, 'associations/allAssociations', { associations , associationsInvitations });
     } catch (error) {
         console.error("Database query failed:", error.message);
-        res.status(500).send("Database connection error. Check your terminal for details.");
+        res.end("Database error: Could not save family group.");
     }
 }
 async function findById(req, res, params) {

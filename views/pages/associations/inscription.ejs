@@ -28,18 +28,16 @@
             <div class="form-card-container">
                 <div class="form-header">
                     <span class="badge-tag">Adhesion Portal</span>
+
                     <h1>New Member Registration</h1>
                     <p>Register a new member to link them with municipal activities, calculate household tier discounts,
                         and verify medical compliance.</p>
                 </div>
-
                 <form action="/register" method="POST" class="styled-form" id="worker_form">
-
                     <% if (selectedAssociation) { %>
-                    <span class="badge-tag"><%= selectedAssociation.id %></span>
                         <input type="hidden" name="association_id" value="<%= selectedAssociation.id %>">
-                        <input type="hidden" id="base_price" name="base_price" value="<%= selectedAssociation.base_price %>">
-
+                        <input type="hidden" id="base_price" name="base_price"
+                            value="<%= selectedAssociation.base_price %>">
                         <% } %>
 
                             <fieldset class="form-section">

@@ -1,25 +1,28 @@
 const db = require('../config/db');
 
-async function index(tableName) {
-    const query = `SELECT * FROM ${tableName}`;
+async function index(tableName, column = null, conditionValue = null) {
+    let query = `SELECT * FROM ${tableName}`;
+    if (column) {
+        query = `SELECT * FROM ${tableName} where  ${column} = '${conditionValue}'`;
+    }
     const { rows } = await db.query(query);
     return rows;
 }
 
 async function findById(tableName, id, idColumn = 'id') {
     const query = `SELECT * FROM ${tableName} WHERE ${idColumn} = $1`;
-    const { rows } = await db.query(query,[id]);
+    const { rows } = await db.query(query, [id]);
     return rows[0] || null;
 }
 async function update(tableName, id, data, idColumn = 'id') {
     const keys = Object.keys(data);
+    if (keys.length === 0) {
+        throw new Error("No data provided for update");
+    }
     const values = Object.values(data);
-
     const setClause = keys.map((key, index) => `${key} = $${index + 1}`).join(', ');
-
     values.push(id);
     const idParamIndex = values.length;
-
     const query = `
         UPDATE ${tableName}
         SET ${setClause}

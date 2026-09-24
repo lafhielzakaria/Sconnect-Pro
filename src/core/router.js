@@ -5,6 +5,7 @@ const associationRegistrationController = require('../controllers/associations/A
 const familyController = require('../controllers/family/familyController');
 const router = FindMyWay();
 router.get('/', index);
+router.post('/associationRequests/:id/:response', associationRegistrationController.handleInvitationResponse);
 router.post('/families/store', familyController.store);
 router.post('/register', associationRegistrationController.register);
 router.get('/associationCreate', associationController.create);

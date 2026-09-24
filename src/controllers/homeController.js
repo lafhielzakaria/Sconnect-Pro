@@ -2,7 +2,7 @@ const { render } = require('../core/renderer');
 const service = require('../services/association/associationService');
 async function index(req, res) {
     try {
-        const allAssociations = await service.getAllAssociations();
+        const allAssociations = await service.getAllObjects();
         const associations = allAssociations.slice(0, 3);
         await render(res, 'dashboard', { associations });
     } catch (error) {

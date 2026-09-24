@@ -4,16 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>SportConnect Pro — All Associations</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/style.css">
     <link rel="stylesheet" href="/public/css/theme.css">
 </head>
@@ -22,55 +16,75 @@
 
     <%- include("../partials/navbar") %>
 
-    <section style="padding: 40px 0;">
-
+    <section class="page-section">
         <div class="wrap">
 
-            <div class="back-nav" style="margin-bottom: 20px;">
+            <div class="back-nav">
                 <a href="javascript:history.back()" class="back-link">← Back to Overview</a>
             </div>
 
-            <div class="section-head" style="margin-bottom: 30px;">
+            <div class="section-head">
                 <h2>All Partner Associations</h2>
-                 <a href="/associationCreate" class="btn btn-primary btn-lg">
-                        + Create Association
-                    </a>
+                <a href="/associationCreate" class="btn btn-primary btn-lg">
+                    + Create Association
+                </a>
             </div>
 
-            <div class="all-associations-stack">
+            <div class="content-grid">
 
-                <% if (typeof associations !== 'undefined' && associations.length > 0) { %>
-                    <% associations.forEach(assoc => { %>
-                        <div class="full-width-assoc-row">
-                            
-                            <h3>
-                                <%= assoc.name %>
-                            </h3>
-
-                            <p>
-                                <%= assoc.description %>
-                            </p>
-
-                            <div class="assoc-details-meta">
-                                <span><strong>Email:</strong> <%= assoc.contact_email %></span>
-                                <span><strong>Phone:</strong> <%= assoc.phone %></span>
-                                <span><strong>SIREN:</strong> <%= assoc.siren_number %></span>
+                <div class="all-associations-stack">
+                    <% if (typeof associations !== 'undefined' && associations.length > 0) { %>
+                        <% associations.forEach(assoc => { %>
+                            <div class="full-width-assoc-row">
+                                <h3><%= assoc.name %></h3>
+                                <p><%= assoc.description %></p>
+                                <div class="assoc-details-meta">
+                                    <span><strong>Email:</strong> <%= assoc.contact_email %></span>
+                                    <span><strong>Phone:</strong> <%= assoc.phone %></span>
+                                    <span><strong>SIREN:</strong> <%= assoc.siren_number %></span>
+                                </div>
+                                <a href="/associationDetails/<%= assoc.id %>" class="btn btn-primary">
+                                    Become a member →
+                                </a>
                             </div>
+                        <% }) %>
+                    <% } else { %>
+                        <p class="empty-note">No partner associations found at this time.</p>
+                    <% } %>
+                </div>
 
-                            <a href="/associationDetails/<%= assoc.id %>" class="btn btn-primary">
-                                Become a member →
-                            </a>
+                <aside class="sidebar-invitations">
+                    <h3>Pending Requests</h3>
 
+                    <% if (typeof associationsInvitations !== 'undefined' && associationsInvitations && associationsInvitations.length > 0) { %>
+                        <div class="invitations-list">
+                            <% associationsInvitations.forEach(req => { %>
+                                <div class="invitation-card">
+                                    <h4><%= req.first_name %> <%= req.last_name %></h4>
+                                    <div class="invitation-details">
+                                        <span><strong>Email:</strong> <%= req.email %></span>
+                                        <span><strong>Phone:</strong> <%= req.phone %></span>
+                                        <span><strong>Price:</strong> €<%= req.final_price %></span>
+                                    </div>
+                                    <div class="invitation-actions">
+                                        <form action="/associationRequests/<%= req.id %>/accepted" method="POST" class="action-form">
+                                            <button type="submit" class="btn btn-success">Accept</button>
+                                        </form>
+                                        <form action="/associationRequests/<%= req.id %>/rejected" method="POST" class="action-form">
+                                            <button type="submit" class="btn btn-danger">Reject</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <% }) %>
                         </div>
-                    <% }) %>
-                <% } else { %>
-                    <p class="empty-note">No partner associations found at this time.</p>
-                <% } %>
+                    <% } else { %>
+                        <p class="empty-requests">No pending association requests.</p>
+                    <% } %>
+                </aside>
 
             </div>
 
         </div>
-
     </section>
 
 </body>
