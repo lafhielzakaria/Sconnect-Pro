@@ -3,6 +3,8 @@ const { index } = require('../controllers/homeController');
 const associationController = require('../controllers/associations/associationController');
 const associationRegistrationController = require('../controllers/associations/AssociationRegistrationController');
 const familyController = require('../controllers/family/familyController');
+const facilityController = require('../controllers/facilities/facilityController');
+const activityController = require('../controllers/activites/activiteController');
 const router = FindMyWay();
 router.get('/', index);
 router.post('/associationRequests/:id/:response', associationRegistrationController.handleInvitationResponse);
@@ -16,6 +18,17 @@ router.get('/associations', associationController.index);
 router.get('/families', familyController.index);
 router.get('/familie/:id', familyController.findObject);
 router.post('/association/store', associationController.store);
+router.get('/facilities', facilityController.index);
+router.get('/facilityCreate', facilityController.create);
+router.post('/facilities/store', facilityController.store);
+router.get('/activities', activityController.index);
+router.get('/activityCreate', activityController.create);
+router.post('/activities/store', activityController.storeActivity);
+router.post('/activities/:id/join', activityController.join);
+router.post('/activities/:id/delete', activityController.destroy);
+router.post('/associations/:id/delete', associationController.destroy);
+router.post('/facilities/:id/delete', facilityController.destroy);
+router.post('/families/:id/delete', familyController.destroy);
 function lookup(req, res) {
     router.lookup(req, res);
 }

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Activity — SportConnect Pro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/public/css/theme.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+
+    <main class="form-page">
+
+        <div class="wrap">
+
+            <div class="back-nav">
+                <a href="javascript:history.back()" class="back-link">
+                    ← Back to Overview
+                </a>
+            </div>
+
+            <div class="form-card-container">
+
+                <div class="form-header">
+
+                    <span class="badge-tag">
+                        Activity Registration
+                    </span>
+
+                    <h1>Create Activity</h1>
+
+                    <p>
+                        Create a sports activity and assign it to an association
+                        and one of its available facilities.
+                    </p>
+
+                </div>
+
+                <form action="/activities/store" method="POST" class="styled-form" id="activityForm" novalidate>
+
+                    <fieldset class="form-section">
+
+                        <h2>Activity Details</h2>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="title">
+                                    Activity Title
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="title"
+                                    name="title"
+                                    placeholder="e.g. Basketball Practice"
+                                >
+                                <small class="error-text" id="err-title"></small>
+
+                                <small class="help-text">
+                                    Enter the name of the activity.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row grid-2">
+
+                            <div class="form-group">
+
+                                <label for="association_id">
+                                    Association
+                                </label>
+
+                                <select id="association_id" name="association_id">
+
+                                    <option value="" disabled selected>
+                                        Select an association
+                                    </option>
+
+                                    <% if (typeof associations !== 'undefined' && associations.length > 0) { %>
+
+                                        <% associations.forEach(association => { %>
+
+                                            <option value="<%= association.id %>">
+                                                <%= association.name %>
+                                            </option>
+
+                                        <% }) %>
+
+                                    <% } %>
+
+                                </select>
+                                <small class="error-text" id="err-association"></small>
+
+                                <small class="help-text">
+                                    Select the association responsible for this activity.
+                                </small>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="facility_id">
+                                    Facility
+                                </label>
+
+                                <select id="facility_id" name="facility_id">
+
+                                    <option value="" disabled selected>
+                                        Select a facility
+                                    </option>
+
+                                    <% if (typeof facilities !== 'undefined' && facilities.length > 0) { %>
+
+                                        <% facilities.forEach(facility => { %>
+
+                                            <option value="<%= facility.id %>">
+                                                <%= facility.name %>
+                                            </option>
+
+                                        <% }) %>
+
+                                    <% } %>
+
+                                </select>
+                                <small class="error-text" id="err-facility"></small>
+
+                                <small class="help-text">
+                                    Select the facility where the activity will take place.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="max_capacity">
+                                    Maximum Capacity
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="max_capacity"
+                                    name="max_capacity"
+                                    min="1"
+                                    placeholder="e.g. 20"
+                                >
+                                <small class="error-text" id="err-capacity"></small>
+
+                                <small class="help-text">
+                                    Maximum number of participants allowed.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="activity_date">
+                                    Activity Date
+                                </label>
+
+                                <input
+                                    type="date"
+                                    id="activity_date"
+                                    name="activity_date"
+                                >
+                                <small class="error-text" id="err-date"></small>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row grid-2">
+
+                            <div class="form-group">
+
+                                <label for="start_time">
+                                    Start Time
+                                </label>
+
+                                <input
+                                    type="time"
+                                    id="start_time"
+                                    name="start_time"
+                                >
+                                <small class="error-text" id="err-start"></small>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="end_time">
+                                    End Time
+                                </label>
+
+                                <input
+                                    type="time"
+                                    id="end_time"
+                                    name="end_time"
+                                >
+                                <small class="error-text" id="err-end"></small>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+
+                    <div class="form-actions">
+
+                        <a href="/" class="btn btn-secondary">
+                            Cancel
+                        </a>
+
+                        <button type="submit" class="btn btn-primary">
+                            Create Activity →
+                        </button>
+
+                    </div>
+
+                </form>
+
+                <script>
+                    document.getElementById('activityForm').addEventListener('submit', function (e) {
+                        let valid = true;
+
+                        const title = document.getElementById('title');
+                        const association = document.getElementById('association_id');
+                        const facility = document.getElementById('facility_id');
+                        const capacity = document.getElementById('max_capacity');
+                        const date = document.getElementById('activity_date');
+                        const start = document.getElementById('start_time');
+                        const end = document.getElementById('end_time');
+
+                        const setErr = (id, msg) => { document.getElementById(id).textContent = msg; };
+                        const clearErr = (id) => { document.getElementById(id).textContent = ''; };
+
+                        clearErr('err-title'); clearErr('err-association'); clearErr('err-facility');
+                        clearErr('err-capacity'); clearErr('err-date'); clearErr('err-start'); clearErr('err-end');
+
+                        if (!title.value.trim()) { setErr('err-title', 'Title is required.'); valid = false; }
+                        if (!association.value) { setErr('err-association', 'Please select an association.'); valid = false; }
+                        if (!facility.value) { setErr('err-facility', 'Please select a facility.'); valid = false; }
+                        if (!capacity.value || parseInt(capacity.value) < 1) { setErr('err-capacity', 'Capacity must be at least 1.'); valid = false; }
+
+                        const now = new Date();
+                        const selectedDate = new Date(date.value);
+                        if (!date.value) {
+                            setErr('err-date', 'Date is required.'); valid = false;
+                        } else if (selectedDate <= now) {
+                            setErr('err-date', 'Activity date must be in the future.'); valid = false;
+                        }
+
+                        if (!start.value) { setErr('err-start', 'Start time is required.'); valid = false; }
+                        if (!end.value) { setErr('err-end', 'End time is required.'); valid = false; }
+                        if (start.value && end.value && end.value <= start.value) {
+                            setErr('err-end', 'End time must be after start time.'); valid = false;
+                        }
+
+                        if (!valid) e.preventDefault();
+                    });
+                </script>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="/public/js/client-validation.js"></script>
+
+</body>
+
+</html>

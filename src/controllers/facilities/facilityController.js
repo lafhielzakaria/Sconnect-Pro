@@ -1,17 +1,15 @@
 const { render } = require('../../core/renderer');
-const service = require('../../services/association/associationService');
+const service = require('../../services/facility/facilityService');
+const associationService = require('../../services/association/associationService');
 const { remove } = require('../../services/globalService');
 async function index(req, res, params) {
     try {
-        const { id } = params;
-        const associations = await service.getAllObjects('associations');
-        const associationsInvitations = await service.getAllObjects("association_members", [], { status: "pending" });
-        console.log(associationsInvitations);
-        if (!associations) {
+        const facilities = await service.getAllObjects('facilities');
+        if (!facilities) {
             res.writeHead(404, { 'Content-Type': 'text/plain' });
             return res.end("no associations created until the moment.");
         }
-        await render(res, 'associations/allAssociations', { associations , associationsInvitations });
+        await render(res, 'facilities/facilities', { facilities });
     } catch (error) {
         console.error("Database query failed:", error.message);
         res.end("Database error: Could not save family group.");
@@ -35,7 +33,9 @@ async function findById(req, res, params) {
 }
 async function create(req, res) {
     try {
-        await render(res, 'associations/create', {});
+        console.log("render");
+        const associations = await associationService.getAllObjects('associations');
+        await render(res, 'facilities/create', {associations});
     } catch (error) {
         console.error("file rendering failed:", error.message);
     }
@@ -45,11 +45,10 @@ async function store(req, res) {
         let rawBody = '';
         for await (const part of req) {
             rawBody += part;
-
         }
         const reqBody = Object.fromEntries(new URLSearchParams(rawBody));
-        await service.store('associations', reqBody);
-        res.writeHead(302, { Location: '/associations' });
+        await service.store("facilities",reqBody);
+        res.writeHead(302, { Location: '/facilities' });
         res.end();
     } catch (error) {
         console.error("Failed to save family group:", error.message);
@@ -59,11 +58,11 @@ async function store(req, res) {
 }
 async function destroy(req, res, params) {
     try {
-        await remove('associations', params.id);
-        res.writeHead(302, { Location: '/associations' });
+        await remove('facilities', params.id);
+        res.writeHead(302, { Location: '/facilities' });
         res.end();
     } catch (error) {
-        console.error('Failed to delete association:', error.message);
+        console.error('Failed to delete facility:', error.message);
         res.writeHead(500, { 'Content-Type': 'text/plain' });
         res.end('Database error.');
     }

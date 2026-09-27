@@ -52,6 +52,43 @@ async function save(tableName, data) {
     const { rows } = await db.query(query, values);
     return rows[0];
 }
+async function getJoinedData(baseTable, joins = [], conditions = {}) {
+    const joinedNames = joins
+        .map(join => {
+            const alias = join.alias || `${join.table}_name`;
+            return `${join.table}.name AS ${alias}`;
+        })
+        .join(', ');
+
+    let query = `
+        SELECT
+            ${baseTable}.*${joinedNames ? `, ${joinedNames}` : ''}
+        FROM ${baseTable}
+    `;
+
+    const values = [];
+    let paramIndex = 1;
+
+    joins.forEach(join => {
+        query += ` JOIN ${join.table} ON ${join.on}`;
+    });
+
+    const conditionKeys = Object.keys(conditions);
+
+    if (conditionKeys.length > 0) {
+        const whereClauses = conditionKeys.map(key => {
+            values.push(conditions[key]);
+            return `${key} = $${paramIndex++}`;
+        });
+
+        query += ` WHERE ${whereClauses.join(' AND ')}`;
+    }
+
+    const { rows } = await db.query(query, values);
+
+    return rows;
+}
+
 
 async function remove(tableName, id, idColumn = 'id') {
     const query = `DELETE FROM ${tableName} WHERE ${idColumn} = $1 RETURNING *`;
@@ -65,4 +102,5 @@ module.exports = {
     update,
     save,
     remove,
+    getJoinedData
 };

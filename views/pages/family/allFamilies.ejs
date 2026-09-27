@@ -57,6 +57,12 @@
                                             </span>
                                 </div>
 
+                                <div class="card-actions">
+                                    <form action="/families/<%= family.id %>/delete" method="POST">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+
                             </div>
                             <% }) %>
                                 <% } else { %>

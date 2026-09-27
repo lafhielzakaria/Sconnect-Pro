@@ -43,9 +43,12 @@
                                     <span><strong>Phone:</strong> <%= assoc.phone %></span>
                                     <span><strong>SIREN:</strong> <%= assoc.siren_number %></span>
                                 </div>
-                                <a href="/associationDetails/<%= assoc.id %>" class="btn btn-primary">
-                                    Become a member →
-                                </a>
+                                <div class="card-actions">
+                                    <a href="/associationDetails/<%= assoc.id %>" class="btn btn-primary">Become a member →</a>
+                                    <form action="/associations/<%= assoc.id %>/delete" method="POST">
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
                             </div>
                         <% }) %>
                     <% } else { %>

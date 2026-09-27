@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>All Activities — SportConnect Pro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/public/css/theme.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+
+    <%- include("../partials/navbar") %>
+
+    <main class="page-section">
+
+        <div class="wrap">
+
+            <div class="back-nav">
+                <a href="javascript:history.back()" class="back-link">
+                    ← Back to Overview
+                </a>
+            </div>
+
+            <div class="section-head">
+                <h2>All Activities</h2>
+
+                <a href="/activityCreate" class="btn btn-primary btn-lg">
+                    + Create Activity
+                </a>
+            </div>
+
+            <div class="activities-grid">
+
+                <% if (typeof activitiesWithDetails !== 'undefined' && activitiesWithDetails.length > 0) { %>
+
+                    <% activitiesWithDetails.forEach(activity => { %>
+
+                        <article class="activity-card">
+
+                            <div class="activity-card-header">
+
+                                <span class="badge-tag">
+                                    Activity
+                                </span>
+
+                                <h3>
+                                    <%= activity.title %>
+                                </h3>
+
+                            </div>
+
+                            <div class="activity-details">
+
+                                <div class="activity-detail">
+
+                                    <span class="activity-label">
+                                        Date
+                                    </span>
+
+                                    <span class="activity-value">
+                                        <%= new Date(activity.activity_date).toDateString() %>
+                                    </span>
+
+                                </div>
+
+                                <div class="activity-detail">
+
+                                    <span class="activity-label">
+                                        Time
+                                    </span>
+
+                                    <span class="activity-value">
+                                        <%= activity.start_time %> — <%= activity.end_time %>
+                                    </span>
+
+                                </div>
+
+                                <div class="activity-detail">
+
+                                    <span class="activity-label">
+                                        Maximum Capacity
+                                    </span>
+
+                                    <span class="activity-value">
+                                        <%= activity.max_capacity %> people
+                                    </span>
+
+                                </div>
+
+                                <div class="activity-detail">
+
+                                    <span class="activity-label">
+                                        Current Participants
+                                    </span>
+
+                                    <span class="activity-value">
+                                        <%= activity.current_participants_number %> / <%= activity.max_capacity %>
+                                    </span>
+
+                                </div>
+
+                                <div class="activity-detail">
+
+                                    <span class="activity-label">
+                                        Association
+                                    </span>
+
+                                    <span class="activity-value">
+                                        <%= activity.association_name %>
+                                    </span>
+
+                                </div>
+
+                                <div class="activity-detail">
+
+                                    <span class="activity-label">
+                                        Facility
+                                    </span>
+
+                                    <span class="activity-value">
+                                        <%= activity.facility_name %>
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+                            <div class="card-actions">
+                                <form action="/activities/<%= activity.id %>/join" method="POST">
+                                    <button type="submit" class="btn btn-primary">Join</button>
+                                </form>
+                                <form action="/activities/<%= activity.id %>/delete" method="POST">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+
+                        </article>
+
+                    <% }) %>
+
+                <% } else { %>
+
+                    <p class="empty-note">
+                        No activities found at this time.
+                    </p>
+
+                <% } %>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

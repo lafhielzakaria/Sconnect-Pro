@@ -539,6 +539,7 @@ footer .wrap { display: flex; justify-content: space-between; }
     padding: 25px;
     border-radius: 8px;
     border: 1px solid #e2e8f0;
+    border-top: 4px solid var(--color-turf);
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
@@ -601,6 +602,7 @@ footer .wrap { display: flex; justify-content: space-between; }
     padding: 25px;
     border-radius: 8px;
     border: 1px solid #e2e8f0;
+    border-top: 4px solid var(--color-turf);
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
@@ -651,8 +653,9 @@ footer .wrap { display: flex; justify-content: space-between; }
     background: #fff;
     padding: 24px;
     border-radius: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    border-top: 4px solid var(--color-turf);
 }
 
 .full-width-assoc-row h3 {
@@ -739,14 +742,35 @@ footer .wrap { display: flex; justify-content: space-between; }
 }
 
 .btn-danger {
+    padding: 10px 20px;
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-semibold);
+    background: var(--color-brick);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: inline-block;
+}
+
+.btn-danger:hover {
+    background: #8f2e14;
+}
+
+.invitation-actions .btn-danger {
     width: 100%;
     padding: 6px;
     font-size: 13px;
-    background: #dc3545;
-    color: white;
-    border: none;
     border-radius: 4px;
-    cursor: pointer;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--color-line);
 }
 
 .empty-requests {
@@ -761,3 +785,138 @@ footer .wrap { display: flex; justify-content: space-between; }
         grid-template-columns: 1fr;
     }
 }
+.all-facilities-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+}
+
+.full-width-facility-row {
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    border-top: 4px solid var(--color-turf);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.full-width-facility-row h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    color: #1e293b;
+}
+
+.facility-description {
+    color: #64748b;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.facility-details-meta {
+    display: flex;
+    gap: 20px;
+    font-size: 0.95rem;
+    color: #475569;
+    flex-wrap: wrap;
+}
+
+.facility-details-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.empty-note {
+    font-size: 1rem;
+    color: #64748b;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .facility-details-meta {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+.activity-card {
+    background: var(--color-chalk);
+    border: var(--border-width) solid var(--color-line);
+    border-radius: var(--radius-lg);
+    padding: 25px;
+    box-shadow: var(--shadow-sm);
+    border-top: 4px solid var(--color-turf);
+}
+
+.activity-card-header {
+    padding-bottom: 20px;
+    border-bottom: var(--border-width) solid var(--color-line);
+    margin-bottom: 20px;
+}
+
+.activity-card-header .badge-tag {
+    margin-bottom: 10px;
+}
+
+.activity-card-header h3 {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+}
+
+.activity-details {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.activity-detail {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.activity-label {
+    color: var(--color-muted);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+}
+
+.activity-value {
+    color: var(--color-ink);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    text-align: right;
+}
+
+@media (max-width: 800px) {
+    .activities-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .activity-detail {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 3px;
+    }
+
+    .activity-value {
+        text-align: left;
+    }
+}
+

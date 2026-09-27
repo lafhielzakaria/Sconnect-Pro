@@ -1,15 +1,18 @@
 const { render } = require('../../core/renderer');
 const service = require('../../services/family/familyService');
+const { remove } = require('../../services/globalService');
 async function index(req, res) {
     try {
         const families = await service.returnALlFamilies();
         if (!families) {
-            return res.status(404).send("no families created until the moment.");
+            res.writeHead(404, { 'Content-Type': 'text/plain' });
+            return res.end("no families created until the moment.");
         }
         await render(res, 'family/allFamilies', { families });
     } catch (error) {
         console.error("Database query failed:", error.message);
-        res.status(500).send("Database connection error. Check your terminal for details.");
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end("Database connection error. Check your terminal for details.");
     }
 }
 async function create(req, res) {
@@ -17,7 +20,8 @@ async function create(req, res) {
         await render(res, 'family/create', {});
     } catch (error) {
         console.error("Database query failed:", error.message);
-        res.status(500).send("Database connection error. Check your terminal for details.");
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end("Database connection error. Check your terminal for details.");
     }
 }
 async function store(req, res) {
@@ -41,7 +45,7 @@ async function store(req, res) {
 async function findObject(req, res, params) {
     try {
         const { id } = params;
-        const family = await service.findById(req, res, id);
+        const family = await service.findById(id);
         if (!family) {
             return res.end(JSON.stringify({ exists: false }));
         }
@@ -51,4 +55,15 @@ async function findObject(req, res, params) {
         res.end("Database connection error. Check your terminal for details.");
     }
 }
-module.exports = { create, store, index, findObject };
+async function destroy(req, res, params) {
+    try {
+        await remove('families', params.id);
+        res.writeHead(302, { Location: '/families' });
+        res.end();
+    } catch (error) {
+        console.error('Failed to delete family:', error.message);
+        res.writeHead(500, { 'Content-Type': 'text/plain' });
+        res.end('Database error.');
+    }
+}
+module.exports = { create, store, index, findObject, destroy };

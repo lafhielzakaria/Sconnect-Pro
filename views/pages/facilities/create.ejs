@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Facility — SportConnect Pro</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="/public/css/theme.css">
+    <link rel="stylesheet" href="/public/css/style.css">
+</head>
+
+<body>
+
+    <main class="form-page">
+
+        <div class="wrap">
+
+            <div class="back-nav">
+                <a href="javascript:history.back()" class="back-link">
+                    ← Back to Overview
+                </a>
+            </div>
+
+            <div class="form-card-container">
+
+                <div class="form-header">
+
+                    <span class="badge-tag">
+                        Facility Registration
+                    </span>
+
+                    <h1>Create Facility</h1>
+
+                    <p>
+                        Register a sports facility and associate it with an existing
+                        sports association.
+                    </p>
+
+                </div>
+
+                <form action="/facilities/store" method="POST" class="styled-form">
+
+                    <fieldset class="form-section">
+
+                        <h2>Facility Details</h2>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="name">
+                                    Facility Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="name"
+                                    name="name"
+                                    placeholder="e.g. Main Stadium"
+                                    
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+
+                            <div class="form-group">
+
+                                <label for="description">
+                                    Description
+                                </label>
+
+                                <textarea
+                                    id="description"
+                                    name="description"
+                                    rows="4"
+                                    placeholder="Describe the facility, its equipment, and its purpose"
+                                ></textarea>
+
+                            </div>
+
+                        </div>
+
+                        <div class="form-row grid-2">
+
+                            <div class="form-group">
+
+                                <label for="erp_capacity">
+                                    ERP Capacity
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="erp_capacity"
+                                    name="erp_capacity"
+                                    min="1"
+                                    placeholder="e.g. 5000"
+                                    
+                                >
+
+                                <small class="help-text">
+                                    Maximum number of people allowed in the facility.
+                                </small>
+
+                            </div>
+
+                            <div class="form-group">
+
+                                <label for="association_id">
+                                    Association
+                                </label>
+
+                                <select
+                                    id="association_id"
+                                    name="association_id"
+                                    
+                                >
+
+                                    <option value="" disabled selected>
+                                        Select an association
+                                    </option>
+
+                                    <% if (typeof associations !== 'undefined' && associations.length > 0) { %>
+
+                                        <% associations.forEach(association => { %>
+
+                                            <option value="<%= association.id %>">
+                                                <%= association.name %>
+                                            </option>
+
+                                        <% }) %>
+
+                                    <% } %>
+
+                                </select>
+
+                                <small class="help-text">
+                                    Select the association that owns this facility.
+                                </small>
+
+                            </div>
+
+                        </div>
+                    </fieldset>
+
+                    <div class="form-actions">
+
+                        <a href="/" class="btn btn-secondary">
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Create Facility →
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="/public/js/client-validation.js"></script>
+
+</body>
+
+</html>
