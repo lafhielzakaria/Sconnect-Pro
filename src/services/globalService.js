@@ -1,3 +1,4 @@
+const { getSpecificColumns } = require('../controllers/debriefeController');
 const repo = require('../repositories/repositorie');
 
 async function getAllObjects(table, joins = [], conditions = {}) {
@@ -23,5 +24,7 @@ async function findById(table, id) {
 async function remove(table, id) {
     return await repo.remove(table, id);
 }
-
-module.exports = { getAllObjects, store, updateObject, findById, remove };
+async function getSpecificColumns(table,columns){
+return await repo.getSpecificColumns(table,columns);
+}
+module.exports = { getAllObjects, store, updateObject, findById, remove,getSpecificColumns };

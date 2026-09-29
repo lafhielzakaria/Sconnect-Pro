@@ -52,6 +52,19 @@ async function save(tableName, data) {
     const { rows } = await db.query(query, values);
     return rows[0];
 }
+async function getSpecificColumns(tableName, columns) {
+    const query = "select ";
+    for (let i = 0; i < columns.length - 1; i++) {
+        if (i == columns.length - 2) {
+            query += `${columns[i]}`;
+        }
+        query += `${columns[i]} , `;
+    }
+    query += "from activities";
+    query += "union select current_participants_number * 100 / max_capacity";
+    const { rows } = await db.query(query);
+    return rows;
+}
 async function getJoinedData(baseTable, joins = [], conditions = {}) {
     const joinedNames = joins
         .map(join => {
@@ -102,5 +115,5 @@ module.exports = {
     update,
     save,
     remove,
-    getJoinedData
+    getJoinedData, getSpecificColumns
 };
